@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weighing Scale Calculator</title>
+    <title>Clase de exactitud</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <!-- Header -->
         <div class="header">
-            <h1>Weighing Scale Calculator</h1>
-            <p class="subtitle">Calculate basic parameters of your weighing scale</p>
+            <h1>Clase de exactitud</h1>
+            <p class="subtitle">Calcula parametros de tu instrumento de medición</p>
         </div>
 
         <!-- Main Card -->
@@ -20,7 +20,7 @@
             <div class="input-group">
                 <!-- Maximum Capacity Input -->
                 <div class="form-field">
-                    <label for="maxCapacity">Maximum capacity of the scale (Max)</label>
+                    <label for="maxCapacity">Capacidad maxima (Max)</label>
                     <input 
                         type="number" 
                         id="maxCapacity" 
@@ -31,7 +31,7 @@
 
                 <!-- Scale Interval Input -->
                 <div class="form-field">
-                    <label for="scaleInterval">Scale interval (e)</label>
+                    <label for="scaleInterval">Division de verificación (e)</label>
                     <input 
                         type="number" 
                         id="scaleInterval" 
@@ -42,7 +42,7 @@
             </div>
 
             <!-- Calculate Button -->
-            <button id="calculateBtn" class="btn-calculate">Calculate</button>
+            <button id="calculateBtn" class="btn-calculate">Calcular</button>
 
             <!-- Results Section (hidden by default) -->
             <div id="resultsSection" class="results-section" style="display: none;">
@@ -51,13 +51,13 @@
                 <div class="results-grid">
                     <!-- Accuracy Class Result -->
                     <div class="result-item">
-                        <div class="result-label">Accuracy class:</div>
+                        <div class="result-label">Clase de exactitud:</div>
                         <div id="accuracyClass" class="result-value">—</div>
                     </div>
 
                     <!-- Minimum Capacity Result -->
                     <div class="result-item">
-                        <div class="result-label">Minimum capacity:</div>
+                        <div class="result-label">Capacidad minima:</div>
                         <div id="minimumCapacity" class="result-value">—</div>
                     </div>
                 </div>
@@ -65,10 +65,11 @@
         </div>
 
         <!-- Footer Note -->
-        <div class="footer">For internal use only</div>
+        <div class="footer">Hecho por: Erwin Godoy</div>
     </div>
 
     <!-- JavaScript -->
     <script src="script.js"></script>
 </body>
 </html>
+
