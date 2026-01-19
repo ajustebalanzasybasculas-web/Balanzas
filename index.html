@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weighing Scale Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Weighing Scale Calculator</h1>
+            <p class="subtitle">Calculate basic parameters of your weighing scale</p>
+        </div>
+
+        <!-- Main Card -->
+        <div class="card">
+            <!-- Input Fields -->
+            <div class="input-group">
+                <!-- Maximum Capacity Input -->
+                <div class="form-field">
+                    <label for="maxCapacity">Maximum capacity of the scale (Max)</label>
+                    <input 
+                        type="number" 
+                        id="maxCapacity" 
+                        placeholder="Enter maximum capacity"
+                        step="any"
+                    >
+                </div>
+
+                <!-- Scale Interval Input -->
+                <div class="form-field">
+                    <label for="scaleInterval">Scale interval (e)</label>
+                    <input 
+                        type="number" 
+                        id="scaleInterval" 
+                        placeholder="Enter scale interval"
+                        step="any"
+                    >
+                </div>
+            </div>
+
+            <!-- Calculate Button -->
+            <button id="calculateBtn" class="btn-calculate">Calculate</button>
+
+            <!-- Results Section (hidden by default) -->
+            <div id="resultsSection" class="results-section" style="display: none;">
+                <h2>Results</h2>
+                
+                <div class="results-grid">
+                    <!-- Accuracy Class Result -->
+                    <div class="result-item">
+                        <div class="result-label">Accuracy class:</div>
+                        <div id="accuracyClass" class="result-value">—</div>
+                    </div>
+
+                    <!-- Minimum Capacity Result -->
+                    <div class="result-item">
+                        <div class="result-label">Minimum capacity:</div>
+                        <div id="minimumCapacity" class="result-value">—</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Note -->
+        <div class="footer">For internal use only</div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
