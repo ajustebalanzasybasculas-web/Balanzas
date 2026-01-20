@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Class I – Special
         if (e >= 0.001 && n >= 50000) {
-            accuracyClass = 'Class I (Special)';
+            accuracyClass = 'Clase I (Especial)';
             minimumCapacity = 100 * e;
         }
 
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
             (e >= 0.001 && e <= 0.05 && n >= 100 && n <= 100000) ||
             (e >= 0.1 && n >= 5000 && n <= 100000)
         ) {
-            accuracyClass = 'Class II (Fine)';
+            accuracyClass = 'Clase II (Fina)';
             minimumCapacity = (e <= 0.05) ? 20 * e : 50 * e;
         }
 
@@ -49,13 +49,13 @@ document.addEventListener('DOMContentLoaded', function() {
             (e >= 0.001 && e <= 2 && n >= 100 && n <= 10000) ||
             (e >= 5 && n >= 500 && n <= 10000)
         ) {
-            accuracyClass = 'Class III (Medium)';
+            accuracyClass = 'Clase III (Media)';
             minimumCapacity = 20 * e;
         }
 
         // Class IIII – Ordinary
         else if (e >= 5 && n >= 100 && n <= 1000) {
-            accuracyClass = 'Class IIII (Ordinary)';
+            accuracyClass = 'Clase IIII (Ordinaria)';
             minimumCapacity = 10 * e;
         }
 
@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
             accuracyClass: accuracyClass,
             minimumCapacity: minimumCapacity !== null
                 ? minimumCapacity.toFixed(2)
-                : 'N/A'
+                : 'Error'
         };
     }
 
@@ -76,21 +76,21 @@ document.addEventListener('DOMContentLoaded', function() {
         if (isNaN(max) || isNaN(e)) {
             return {
                 isValid: false,
-                message: 'Please enter valid numbers for both fields.'
+                message: 'Por favor ingresa numeros validos'
             };
         }
         
         if (max <= 0 || e <= 0) {
             return {
                 isValid: false,
-                message: 'Values must be greater than zero.'
+                message: 'Los valores deben ser mayores a cero'
             };
         }
         
         if (e > max) {
             return {
                 isValid: false,
-                message: 'Scale interval cannot be greater than maximum capacity.'
+                message: 'La division de verificacion no puede ser mayor a la capacidad maxima'
             };
         }
         
@@ -120,3 +120,4 @@ document.addEventListener('DOMContentLoaded', function() {
         resultsSection.style.display = 'block';
     });
 });
+
