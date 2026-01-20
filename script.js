@@ -16,42 +16,61 @@ document.addEventListener('DOMContentLoaded', function() {
      * ========================================
      * CALCULATION LOGIC
      * ========================================
-     * 
-     * This function calculates the weighing scale parameters based on user input.
-     * 
-     * MODIFY THIS FUNCTION to implement your specific calculation formulas.
+     * Calculates accuracy class and minimum capacity
+     * according to OIML R76
      * 
      * @param {number} max - Maximum capacity of the scale
-     * @param {number} e - Scale interval
-     * @returns {object} Object containing accuracyClass and minimumCapacity
+     * @param {number} e - Verification scale interval
+     * @returns {object}
      */
     function calculateScaleParameters(max, e) {
-        // ========================================
-        // TODO: IMPLEMENT YOUR CALCULATION LOGIC HERE
-        // ========================================
-        
-        // Example placeholder calculations (replace these with actual formulas):
-        
-        // Placeholder for accuracy class calculation
-        // Common accuracy classes: I, II, III, IV (based on verification scale interval)
-        var calculatedAccuracyClass = 'II'; // Replace with actual calculation
-        
-        // Placeholder for minimum capacity calculation
-        // Typically: Min = accuracy class factor × e
-        var calculatedMinCapacity = (20 * e).toFixed(2); // Replace with actual calculation
-        
-        // Return the calculated values
+        const n = max / e;
+
+        let accuracyClass = 'Does not comply';
+        let minimumCapacity = null;
+
+        // Class I – Special
+        if (e >= 0.001 && n >= 50000) {
+            accuracyClass = 'Class I (Special)';
+            minimumCapacity = 100 * e;
+        }
+
+        // Class II – Fine
+        else if (
+            (e >= 0.001 && e <= 0.05 && n >= 100 && n <= 100000) ||
+            (e >= 0.1 && n >= 5000 && n <= 100000)
+        ) {
+            accuracyClass = 'Class II (Fine)';
+            minimumCapacity = (e <= 0.05) ? 20 * e : 50 * e;
+        }
+
+        // Class III – Medium
+        else if (
+            (e >= 0.001 && e <= 2 && n >= 100 && n <= 10000) ||
+            (e >= 5 && n >= 500 && n <= 10000)
+        ) {
+            accuracyClass = 'Class III (Medium)';
+            minimumCapacity = 20 * e;
+        }
+
+        // Class IIII – Ordinary
+        else if (e >= 5 && n >= 100 && n <= 1000) {
+            accuracyClass = 'Class IIII (Ordinary)';
+            minimumCapacity = 10 * e;
+        }
+
         return {
-            accuracyClass: calculatedAccuracyClass,
-            minimumCapacity: calculatedMinCapacity
+            accuracyClass: accuracyClass,
+            minimumCapacity: minimumCapacity !== null
+                ? minimumCapacity.toFixed(2)
+                : 'N/A'
         };
     }
 
     /**
-     * Validates user input
-     * @param {number} max - Maximum capacity
-     * @param {number} e - Scale interval
-     * @returns {object} Object with isValid boolean and error message
+     * ========================================
+     * INPUT VALIDATION
+     * ========================================
      */
     function validateInputs(max, e) {
         if (isNaN(max) || isNaN(e)) {
@@ -75,65 +94,29 @@ document.addEventListener('DOMContentLoaded', function() {
             };
         }
         
-        return {
-            isValid: true,
-            message: ''
-        };
+        return { isValid: true };
     }
 
     /**
-     * Handles the calculation when button is clicked
+     * ========================================
+     * EVENT HANDLER
+     * ========================================
      */
-    function handleCalculate() {
-        // Get input values
-        var maxCapacity = parseFloat(maxCapacityInput.value);
-        var scaleInterval = parseFloat(scaleIntervalInput.value);
-        
-        // Validate inputs
-        var validation = validateInputs(maxCapacity, scaleInterval);
-        
+    calculateBtn.addEventListener('click', function() {
+        const max = parseFloat(maxCapacityInput.value);
+        const e = parseFloat(scaleIntervalInput.value);
+
+        const validation = validateInputs(max, e);
         if (!validation.isValid) {
             alert(validation.message);
             return;
         }
-        
-        // Perform calculation
-        var results = calculateScaleParameters(maxCapacity, scaleInterval);
-        
-        // Display results
-        accuracyClassDisplay.textContent = results.accuracyClass;
-        minimumCapacityDisplay.textContent = results.minimumCapacity;
-        
-        // Show results section with smooth transition
+
+        const result = calculateScaleParameters(max, e);
+
+        accuracyClassDisplay.textContent = result.accuracyClass;
+        minimumCapacityDisplay.textContent = result.minimumCapacity;
+
         resultsSection.style.display = 'block';
-        
-        // Smooth scroll to results (optional)
-        setTimeout(function() {
-            resultsSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }, 100);
-    }
-
-    /**
-     * Handles Enter key press in input fields
-     * @param {KeyboardEvent} event - The keyboard event
-     */
-    function handleKeyPress(event) {
-        if (event.key === 'Enter') {
-            handleCalculate();
-        }
-    }
-
-    // ========================================
-    // EVENT LISTENERS
-    // ========================================
-    
-    // Calculate button click
-    calculateBtn.addEventListener('click', handleCalculate);
-    
-    // Enter key press on input fields
-    maxCapacityInput.addEventListener('keypress', handleKeyPress);
-    scaleIntervalInput.addEventListener('keypress', handleKeyPress);
-    
-    // Optional: Focus on first input field on page load
-    maxCapacityInput.focus();
+    });
 });
