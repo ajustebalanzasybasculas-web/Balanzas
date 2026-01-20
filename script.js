@@ -76,21 +76,21 @@ document.addEventListener('DOMContentLoaded', function() {
         if (isNaN(max) || isNaN(e)) {
             return {
                 isValid: false,
-                message: 'Por favor ingresa numeros validos'
+                message: 'Por favor ingresa numeros validos.'
             };
         }
         
         if (max <= 0 || e <= 0) {
             return {
                 isValid: false,
-                message: 'Los valores deben ser mayores a cero'
+                message: 'Los valores deben ser mayores a cero.'
             };
         }
         
         if (e > max) {
             return {
                 isValid: false,
-                message: 'La division de verificacion no puede ser mayor a la capacidad maxima'
+                message: 'La division de verificacion no puede ser mayor a la capacidad maxima.'
             };
         }
         
@@ -120,4 +120,5 @@ document.addEventListener('DOMContentLoaded', function() {
         resultsSection.style.display = 'block';
     });
 });
+
 
